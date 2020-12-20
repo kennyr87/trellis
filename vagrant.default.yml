@@ -25,4 +25,4 @@ vagrant_plugins:
 # See https://www.vagrantup.com/docs/synced-folders/basic_usage.html#mount_options
 vagrant_synced_folders: []
 
-vagrant_machine: trellis
+vagrant_machine: kezia
