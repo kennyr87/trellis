@@ -1,0 +1,11 @@
+# Documentation: https://roots.io/trellis/docs/ssh-keys/
+admin_user: kenny87
+
+users:
+  - name: "{{ admin_user }}"
+    groups:
+      - sudo
+      - "{{ web_group }}"
+    keys:
+      - "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+      # - https://github.com/username.key

@@ -1,1 +1,9 @@
 mysql_root_password: "{{ vault_mysql_root_password }}" # Define this variable in group_vars/staging/vault.yml
+
+nodejs_version: "14.x"
+nodejs_npm_global_packages:
+  - name: yarn
+    version: 1.22.10
+
+letsencrypt_contact_emails:
+  - kennyr87@gmail.com
