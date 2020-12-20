@@ -1,0 +1,17 @@
+---
+- name: Backup {{ site }} {{ env }} database
+  vars:
+    local_bedrock_dir: "{{ from_host.wordpress_sites[site].local_path }}"
+  import_tasks: database-backup.yml
+  tags: database-backup
+
+- name: Import {{ site }} database from development to {{ env }}
+  vars:
+    url_from: "{{ from_host['wordpress_sites'][site].site_hosts.0.canonical }}"
+    url_to: "{{ to_host['wordpress_sites'][site].site_hosts.0.canonical }}"
+  import_tasks: database-import.yml
+  tags: database-import
+
+- name: Sync uploads between environments
+  import_tasks: uploads.yml
+  tags: uploads

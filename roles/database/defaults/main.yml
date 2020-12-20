@@ -1,0 +1,14 @@
+site: "{{ site }}"
+project_root: "{{ www_root }}/{{ site }}"
+project_web_dir: "{{ project_root }}/current"
+
+host: "{{ env }}_host"
+
+from_host: "{{ hostvars['192.168.50.5'] }}"
+local_bedrock_dir: "{{ from_host.wordpress_sites[site].local_path }}"
+to_host: "{{ hostvars['204.48.17.6'] }}"
+
+current_date_and_time: "{{ ansible_date_time.date | regex_replace('\\-+', '_') }}_{{ ansible_date_time.hour }}_{{ ansible_date_time.minute }}_{{ ansible_date_time.second }}"
+backup_file: "{{ site | regex_replace('\\.+', '_') }}_{{ env }}_{{ current_date_and_time }}.sql.gz"
+dump_file: "{{ site | regex_replace('\\.+', '_') }}_db_dump.sql.gz"
+uploads_file: "{{ site | regex_replace('\\.+', '_') }}_{{ env }}_uploads_{{ current_date_and_time }}.tgz"
