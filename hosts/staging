@@ -2,7 +2,7 @@
 # List each machine only once per [group], even if it will host multiple sites.
 
 [staging]
-your_server_hostname
+204.48.17.6 ansible_connection=ssh
 
 [web]
-your_server_hostname
+204.48.17.6 ansible_connection=ssh 
