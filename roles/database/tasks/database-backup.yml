@@ -49,7 +49,6 @@
       path: "{{ project_web_dir }}/web/app/uploads/"
       dest: "{{ project_web_dir }}/{{ uploads_file }}"
     when: env is defined and env != "development"
-    debugger: always
 
   - name: Pull exported uploads from {{ env }} to development
     fetch:
