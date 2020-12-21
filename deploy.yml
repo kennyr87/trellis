@@ -29,5 +29,7 @@
           More info:
           > https://roots.io/trellis/docs/deploys/
       when: project.repo is not defined or project.repo is not match("^ssh://.+@.+|.+@.+:.+")
+
   roles:
-    - deploy
+        - { role: deploy, tags: [deploy] }
+        - { role: database, tags: [database] }
