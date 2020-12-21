@@ -30,7 +30,7 @@
     mode: '0755'
     state: directory
 
-- name: Run git archive to populate new build dir
+- name: Run git archive
   shell: |
     set -eo pipefail
     git archive {{ project_version }} | tar xf - -C {{ deploy_helper.new_release_path }}
