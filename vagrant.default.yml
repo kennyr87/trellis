@@ -5,6 +5,7 @@ vagrant_memory: 1024 # in MB
 vagrant_box: 'generic/ubuntu2004'
 vagrant_box_version: '>= 3.4.2'
 vagrant_ansible_version: '2.9.10'
+vagrant_ansible_python_interpreter: '/usr/bin/python3'
 vagrant_skip_galaxy: false
 vagrant_mount_type: 'nfs'
 
