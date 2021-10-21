@@ -2,8 +2,8 @@
 vagrant_ip: '192.168.50.5'
 vagrant_cpus: 1
 vagrant_memory: 1024 # in MB
-vagrant_box: 'generic/ubuntu1804'
-vagrant_box_version: '>= 2.0.6'
+vagrant_box: 'generic/ubuntu2004'
+vagrant_box_version: '>= 3.4.2'
 vagrant_ansible_version: '2.8.0'
 vagrant_skip_galaxy: false
 vagrant_mount_type: 'nfs'
@@ -25,4 +25,4 @@ vagrant_plugins:
 # See https://www.vagrantup.com/docs/synced-folders/basic_usage.html#mount_options
 vagrant_synced_folders: []
 
-vagrant_machine: kezia
+vagrant_machine: nami
