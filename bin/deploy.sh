@@ -1,5 +1,15 @@
-#!/bin/bash
-shopt -s nullglob
+#!/usr/bin/env bash
+
+# Enable xtrace if the DEBUG environment variable is set
+if [[ ${DEBUG-} =~ ^1|yes|true$ ]]; then
+    set -o xtrace       # Trace the execution of the script (debug)
+fi
+
+# Enable some options
+set -o errexit          # Exit on most errors (see the manual)
+set -o errtrace         # Make sure any error trap is inherited
+set -o nounset          # Disallow expansion of unset variables
+set -o pipefail         # Use last non-zero exit code in a pipeline
 
 ENVIRONMENTS=( hosts/* )
 ENVIRONMENTS=( "${ENVIRONMENTS[@]##*/}" )
@@ -15,13 +25,11 @@ Available environments:
 `( IFS=$'\n'; echo "${ENVIRONMENTS[*]}" )`
 
 Examples:
-  deploy staging example.com
-  deploy production example.com
-  deploy staging example.com -vv -T 60
+  deploy staging -vv -T 60
 "
 }
 
-[[ $# -lt 2 ]] && { show_usage; exit 127; }
+[[ $# -lt 1 ]] && { show_usage; exit 127; }
 
 for arg
 do

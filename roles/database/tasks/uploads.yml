@@ -4,6 +4,8 @@
   when: env == "development"
 
 - name: Check if {{ site }} folder exists
+  vars:
+    ansible_ssh_private_key_file: "{{ vagrant_ssh_key_file }}"
   delegate_to: vagrant
   stat:
     path: "{{ project_root }}"
@@ -17,8 +19,8 @@
 - block:
   - name: Push uploads
     synchronize:
-      src: "{{ from_host.wordpress_sites[site].local_path }}/web/app/uploads/"
-      dest: "{{  project_root }}/current/web/app/uploads/"
+      src: "{{ local_bedrock_dir }}/web/app/uploads/"
+      dest: "{{  www_project_root }}/current/web/app/uploads/"
       mode: push
       delete: yes
       recursive: yes
@@ -33,8 +35,8 @@
 
   - name: Pull uploads
     synchronize:
-      src: "{{ project_root }}/current/web/app/uploads/"
-      dest: "{{ from_host.wordpress_sites[site].local_path }}/web/app/uploads/"
+      src: "{{ www_project_root }}/current/web/app/uploads/"
+      dest: "{{ local_bedrock_dir }}/web/app/uploads/"
       mode: pull
       delete: yes
       recursive: yes

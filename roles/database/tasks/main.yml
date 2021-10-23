@@ -1,7 +1,5 @@
 ---
 - name: Backup {{ site }} {{ env }} database
-  vars:
-    local_bedrock_dir: "{{ from_host.wordpress_sites[site].local_path }}"
   import_tasks: database-backup.yml
   tags: database-backup
 

@@ -1,12 +1,17 @@
-site: "{{ site }}"
-project_root: "{{ www_root }}/{{ site }}"
+# Note: site name must match up with the site name in `group_vars/staging/wordpress_sites.yml`
+
+www_project_root: "{{ www_root }}/{{ site }}"
+www_project_web_dir: "{{ www_project_root }}/current"
+
+project_root: "{{ www_root_development }}/{{ site }}"
 project_web_dir: "{{ project_root }}/current"
 
 host: "{{ env }}_host"
+vagrant_ssh_key_file: /mnt/data/Projects/nami/trellis/.vagrant/machines/nami/libvirt/private_key
 
-from_host: "{{ hostvars['192.168.50.5'] }}"
+from_host: "{{ hostvars['vagrant'] }}"
 local_bedrock_dir: "{{ from_host.wordpress_sites[site].local_path }}"
-to_host: "{{ hostvars['204.48.17.6'] }}"
+to_host: "{{ hostvars[host] }}"
 
 current_date_and_time: "{{ ansible_date_time.date | regex_replace('\\-+', '_') }}_{{ ansible_date_time.hour }}_{{ ansible_date_time.minute }}_{{ ansible_date_time.second }}"
 backup_file: "{{ site | regex_replace('\\.+', '_') }}_{{ env }}_{{ current_date_and_time }}.sql.gz"
