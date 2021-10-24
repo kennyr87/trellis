@@ -15,7 +15,7 @@ Ansible playbook for Trellis that manages database and uploads migration. Inspir
 To backup database and uploads run
 
 ```
-./bin/deploy.sh <environment> <site name>
+./bin/deploy.sh <environment> <site name> --tags database
 ```
 
 To push or pull uploads run
