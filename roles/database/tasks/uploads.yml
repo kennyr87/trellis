@@ -49,3 +49,4 @@
       var: output_pull.stdout_lines
     when: output_pull.skipped is not defined
   when: result.stat.exists is defined and result.stat.exists and result.stat.isdir is defined and result.stat.isdir
+  tags: uploads

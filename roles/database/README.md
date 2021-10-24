@@ -8,6 +8,7 @@ Ansible playbook for Trellis that manages database and uploads migration. Inspir
 1. Add `databases/*` to the end of the Bedrock `.gitignore` file
 2. Copy vagrant ansible inventory to `hosts/vagrant`
 3. Set alias for host files as mentioned below in the hosts configuration section
+4. Vagrant should be running, if not, run `vagrant up --no-provision` to from trellis root
 
 ## 🏄 Usage
 
@@ -20,7 +21,7 @@ To backup database and uploads run
 To push or pull uploads run
 
 ```
-ansible-playbook -e <environment> -e <site name> -e <mode>
+./bin/uploads.sh <environment> <mode> <site name>
 ```
 
 ### 📌 Tips

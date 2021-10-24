@@ -15,26 +15,28 @@ ENVIRONMENTS=( hosts/* )
 ENVIRONMENTS=( "${ENVIRONMENTS[@]##*/}" )
 
 show_usage() {
-  echo -e "Usage: deploy <environment> <site name> [options]
+  echo -e "Usage: uploads <environment> <mode> <site name> [options]
 
 <environment> is the environment to deploy to ("staging", "production", etc)\n
+Available <mode> options for uploads task: push, pull\n
 <site name> is the WordPress site to deploy (name defined in "wordpress_sites")\n
-[options] is any number of parameters that will be passed to ansible-playbook\n
+[options] is any number of parameters that will be passed to ansible-playbook
 
 Available environments:
 `( IFS=$'\n'; echo "${ENVIRONMENTS[*]}" )`
 
 Examples:
-  deploy staging example.com -vv -T 60
+  uploads staging example.com push -vv -T 60
 "
 }
 
-[[ $# -lt 2 ]] && { show_usage; exit 127; }
+[[ $# -lt 3 ]] && { show_usage; exit 127; }
 
 ENV="$1"; shift
+MODE="$1"; shift
 SITE="$1"; shift
 EXTRA_PARAMS=$@
-DEPLOY_CMD="ansible-playbook deploy.yml -e env=$ENV -e site=$SITE $EXTRA_PARAMS"
+DEPLOY_CMD="ansible-playbook deploy.yml -e env=$ENV -e mode=$MODE -e site=$SITE $EXTRA_PARAMS --tags uploads"
 HOSTS_FILE="hosts/$ENV"
 
 if [[ ! -e $HOSTS_FILE ]]; then
